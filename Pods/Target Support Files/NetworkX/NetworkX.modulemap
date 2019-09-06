@@ -1,0 +1,6 @@
+framework module NetworkX {
+  umbrella header "NetworkX-umbrella.h"
+
+  export *
+  module * { export * }
+}

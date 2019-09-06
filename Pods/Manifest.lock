@@ -1,0 +1,41 @@
+PODS:
+  - NetworkX (0.0.1)
+  - Nimble (8.0.2)
+  - Quick (2.1.0)
+  - SnapKit (5.0.1)
+  - SwiftLint (0.34.0)
+
+DEPENDENCIES:
+  - NetworkX (from `https://github.com/awelch6/NetworkerX.git`, tag `0.0.3`)
+  - Nimble
+  - Quick
+  - SnapKit (~> 5.0.0)
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Nimble
+    - Quick
+    - SnapKit
+    - SwiftLint
+
+EXTERNAL SOURCES:
+  NetworkX:
+    :git: https://github.com/awelch6/NetworkerX.git
+    :tag: 0.0.3
+
+CHECKOUT OPTIONS:
+  NetworkX:
+    :git: https://github.com/awelch6/NetworkerX.git
+    :tag: 0.0.3
+
+SPEC CHECKSUMS:
+  NetworkX: 025787fda944e8949c82474eda13d1cc15103a08
+  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
+  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
+
+PODFILE CHECKSUM: db049e86b5faa40bd6772aed6d6db169e25bc9cf
+
+COCOAPODS: 1.8.0.beta.1
