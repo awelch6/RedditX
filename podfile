@@ -8,8 +8,9 @@ target 'RedditX' do
   # Pods for RedditX
   pod 'SwiftLint'
   pod 'SnapKit', '~>5.0.0'
-  pod 'NetworkX', :git => 'https://github.com/awelch6/NetworkerX.git', :tag => '0.0.3'
-
+  pod 'NetworkX', :git => 'https://github.com/awelch6/NetworkerX.git', :tag => '0.0.4'
+  pod 'SDWebImage'
+  
   target 'RedditXTests' do
     inherit! :search_paths
     # Pods for testing

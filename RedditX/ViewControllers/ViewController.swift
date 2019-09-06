@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import NetworkX
+import SnapKit
 
 /*
  // TODO:
- - Create a 'ListingsCollectionView'
  - Create a collectionView to show each post
  - Create innovative way to show search results
  - Create WebView to show reddit
@@ -21,12 +20,56 @@ import NetworkX
 
 class ViewController: UIViewController {
 
-    let requestManager = RequestManager()
-
+    let listingCollectionView = ListingsCollectionView(flowLayout: ListingCollectionViewFlowLayout())
+    
+    let networker: Netoworkable
+    
+    init(networker: Netoworkable = Networker()) {
+        self.networker = networker
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         view.backgroundColor = .white
+
+        setupListingCollectionView()
+        setupContentCollectionViewController()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Initial UI Setup
+
+extension ViewController {
+    
+    func setupListingCollectionView() {
+        view.addSubview(listingCollectionView)
+        
+        listingCollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.width.centerX.equalToSuperview()
+            make.height.equalTo(60)
+        }
+        
+        listingCollectionView.listingDelegate = self
+    }
+    
+    func setupContentCollectionViewController() {
+        
+    }
+}
+
+// MARK: ListingCollectionViewDelegate
+
+extension ViewController: ListingCollectionViewDelegate {
+    func collectionView(_ collectionView: ListingsCollectionView, didSelect listingType: ListingType) {
+        networker.request(listing: listingType) { (listing, error) in
+            print(listing)
+            print(error)
+        }
     }
 }

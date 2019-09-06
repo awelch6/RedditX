@@ -1,6 +1,6 @@
 {
   "name": "NetworkX",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "summary": "A Simple Networking Layer Built on URLSession",
   "description": "\"A Simple Networking Layer Built on URLSession. Networking calls are made on a background thread and then completed back on the main thread to avoid UI crashes.\"",
   "homepage": "https://github.com/awelch6/NetworkerX",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/awelch6/NetworkerX.git",
-    "tag": "0.0.1"
+    "tag": "0.0.3"
   },
   "source_files": "Sources/**/*.swift"
 }
