@@ -11,17 +11,17 @@ import SnapKit
 
 /*
  // TODO:
+ - Create extension for shadow on view
  - Create a collectionView to show each post
  - Create innovative way to show search results
  - Create WebView to show reddit
- - Make network layer into its own pod
  - Find a way to manage images on some posts and not others.
  */
 
 class ViewController: UIViewController {
 
     let listingCollectionView = ListingsCollectionView(flowLayout: ListingCollectionViewFlowLayout())
-    
+    let contentCollectionViewController = ContentCollectionViewController(collectionViewLayout: ContentCollectionViewCellFlowLayout())
     let networker: Netoworkable
     
     init(networker: Netoworkable = Networker()) {
@@ -32,7 +32,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
         setupListingCollectionView()
         setupContentCollectionViewController()
     }
@@ -59,7 +58,11 @@ extension ViewController {
     }
     
     func setupContentCollectionViewController() {
-        
+        add(contentCollectionViewController)
+        contentCollectionViewController.view.snp.makeConstraints { (make) in
+            make.top.equalTo(listingCollectionView.snp.bottom)
+            make.width.centerX.bottom.equalToSuperview()
+        }
     }
 }
 
@@ -67,9 +70,8 @@ extension ViewController {
 
 extension ViewController: ListingCollectionViewDelegate {
     func collectionView(_ collectionView: ListingsCollectionView, didSelect listingType: ListingType) {
-        networker.request(listing: listingType) { (listing, error) in
-            print(listing)
-            print(error)
+        networker.request(listing: listingType) { (content, error) in
+            self.contentCollectionViewController.content = content
         }
     }
 }

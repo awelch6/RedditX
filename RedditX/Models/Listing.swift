@@ -16,27 +16,35 @@ struct Listing: Decodable {
 
 // MARK: - ListingData
 struct ListingData: Decodable {
-    let children: [Child]
+    let content: [Content]
+    
+    enum CodingKeys: String, CodingKey {
+        case content = "children"
+    }
 }
 
 // MARK: - Child
-struct Child: Decodable {
+struct Content: Decodable {
     let kind: String
-    let data: DataElement
+    let post: Post
+    
+    enum CodingKeys: String, CodingKey {
+        case kind
+        case post = "data"
+    }
 }
 
 // MARK: - DataClass
 
-struct DataElement: Decodable {
+struct Post: Decodable {
     
-    let author, name, subreddit, url: String?
+    let author, name, subreddit, thumbnail, url: String?
     let permalink, title: String?
     let created, downs, numComments, score, ups: Int?
     let preview: Preview?
 
     enum CodingKeys: String, CodingKey {
-        case created, downs, name, permalink, score, subreddit, title, preview, ups, url
-        case author = "author_fullname"
+        case author, created, downs, name, permalink, score, subreddit, thumbnail, title, preview, ups, url
         case numComments = "num_comments"
     }
 }

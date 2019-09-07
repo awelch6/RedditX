@@ -7,17 +7,33 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ContentCollectionViewController: UICollectionViewController {
     
-    var content: [String] = [] {
-        didSet { collectionView.reloadData() }
+    var content: [Content] = [] {
+        didSet {
+            imageCache = [:]
+            fetchImages()
+        }
     }
+    
+    var imageCache: [Int: ImageDownloader] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.backgroundColor = Colors.whiteX
         collectionView.register(ContentCollectionViewCell.self)
+    }
+    
+    private func fetchImages() {
+        for (index, content) in content.enumerated() {
+            guard let urlString = content.post.thumbnail, urlString.isValidURL, let url = URL(string: urlString) else {
+                continue
+            }
+            imageCache[index] = ImageDownloader(position: index, url: url, delegate: self)
+        }
+        collectionView.reloadData()
     }
 }
 
@@ -30,124 +46,34 @@ extension ContentCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell: ContentCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        
+        cell.postDetailsView.thumbnail.image = nil
+        
+        var viewModel = ContentViewModel(content: content[indexPath.item])
+        viewModel.setImage(imageCache[indexPath.item]?.image)
+        cell.display(viewModel: viewModel)
+       
+        return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        imageCache[indexPath.item]?.downloadImage()
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        imageCache[indexPath.item]?.cancelDownload()
     }
 }
 
-struct ContentViewModel {
-    
-}
+// MARK: ImageDownloaderDelegate
 
-struct AuthorProfileViewModel {
-    
-    var image: UIImage? {
-        return UIImage(named: "Image")
+extension ContentCollectionViewController: ImageDownloaderDelegate {
+    func imageDownloader(_ imageDownloader: ImageDownloader, downloaded image: UIImage, at position: Int) {
+        collectionView.reloadItems(at: [IndexPath(item: position, section: 0)])
     }
     
-    var authorDetails: NSMutableAttributedString {
-        let titleAttributes = NSMutableAttributedString(string: "Mason Douglas" + "\n",
-                                                        attributes: [.font: Fonts.bold(16), .foregroundColor: Colors.blackX])
-        
-        //default color to white for now because a color property does not exist on the response.
-        let attributes = NSMutableAttributedString(string: "12:35pm", attributes: [.font: Fonts.regular(14), .foregroundColor: Colors.greyX])
-        titleAttributes.append(attributes)
-        
-        return titleAttributes
+    func imageDownloader(_ imageDownloader: ImageDownloader, didFailWith error: Error, downloading imageURL: URL, at postion: Int) {
+        print("Error: trying to load \(imageURL.absoluteURL) at position: \(postion)")
     }
-}
-
-class AuthorProfileView: UIView {
-    
-    let profileImageView = UIImageView()
-    let authorDetailsLabel = UILabel()
-
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: CGFloat.greatestFiniteMagnitude, height: 65)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        
-        setProperties()
-        setupProfileImageView()
-        setupPostDetailsLabel()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-    }
-    
-    func display(viewModel: AuthorProfileViewModel) {
-        profileImageView.image = viewModel.image
-        authorDetailsLabel.attributedText = viewModel.authorDetails
-    }
-    
-    private func setProperties() {
-        backgroundColor = Colors.whiteX
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: Initial UI Setup
-
-extension AuthorProfileView {
-    
-    private func setupProfileImageView() {
-        addSubview(profileImageView)
-        
-        profileImageView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().inset(5)
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(30)
-        }
-    }
-    
-    private func setupPostDetailsLabel() {
-        addSubview(authorDetailsLabel)
-        
-        authorDetailsLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(profileImageView.snp.right).inset(10)
-            make.centerY.equalToSuperview()
-        }
-    }
-}
-
-class ContentCollectionViewCell: UICollectionViewCell {
-    
-    let authorProfileView = AuthorProfileView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        setNeedsLayout()
-        layoutIfNeeded()
-        
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        var frame = layoutAttributes.frame
-        frame.size.height = ceil(size.height)
-        layoutAttributes.frame = frame
-        
-        return layoutAttributes
-    }
-    
-    func display(viewModel: ContentViewModel) {
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-class ContentCollectionViewCellFlowLayout: UICollectionViewFlowLayout {
-    
 }

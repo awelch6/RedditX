@@ -20,7 +20,7 @@ protocol Netoworkable {
 }
 
 typealias Subreddit = String
-typealias RedditResponse = (Listing?, NetworkError?) -> Void
+typealias RedditResponse = ([Content], NetworkError?) -> Void
 typealias RedditSearchResponse = ([String]) -> Void
 
 struct Networker: Netoworkable {
@@ -35,30 +35,30 @@ struct Networker: Netoworkable {
     
     func request(listing: ListingType, _ completion: @escaping RedditResponse) {
         guard let url = URL(string: "\(baseURL)/r/\(listing.rawValue.lowercased()).json") else {
-            return completion(nil, .invalidURL)
+            return completion([], .invalidURL)
         }
         
         requestManager.request(type: Listing.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
             switch response {
             case .success(let model):
-                completion(model, nil)
+                completion(model.data.content, nil)
             case .failure(let error):
-                completion(nil, error)
+                completion([], error)
             }
         }
     }
     
     func request(subreddit: Subreddit, _ completion: @escaping RedditResponse) {
         guard let url = URL(string: "\(baseURL)/r/\(subreddit).json") else {
-            return completion(nil, .invalidURL)
+            return completion([], .invalidURL)
         }
         
         requestManager.request(type: Listing.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
             switch response {
             case .success(let model):
-                completion(model, nil)
+                completion(model.data.content, nil)
             case .failure(let error):
-                completion(nil, error)
+                completion([], error)
             }
         }
     }
