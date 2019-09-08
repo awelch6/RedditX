@@ -11,14 +11,14 @@ import SnapKit
 
 /*
  // TODO:
- - Create extension for shadow on view
- - Create a collectionView to show each post
  - Create innovative way to show search results
- - Create WebView to show reddit
- - Find a way to manage images on some posts and not others.
+ - Create Search bar
+ - Add loading animations
  */
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
+
+    let searchController = UISearchController(searchResultsController: nil)
 
     let listingCollectionView = ListingsCollectionView(flowLayout: ListingCollectionViewFlowLayout())
     let contentCollectionViewController = ContentCollectionViewController(collectionViewLayout: ContentCollectionViewCellFlowLayout())
@@ -34,6 +34,9 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         setupListingCollectionView()
         setupContentCollectionViewController()
+        
+        navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +46,7 @@ class ViewController: UIViewController {
 
 // MARK: Initial UI Setup
 
-extension ViewController {
+extension MainViewController {
     
     func setupListingCollectionView() {
         view.addSubview(listingCollectionView)
@@ -68,9 +71,9 @@ extension ViewController {
 
 // MARK: ListingCollectionViewDelegate
 
-extension ViewController: ListingCollectionViewDelegate {
+extension MainViewController: ListingCollectionViewDelegate {
     func collectionView(_ collectionView: ListingsCollectionView, didSelect listingType: ListingType) {
-        networker.request(listing: listingType) { (content, error) in
+        networker.request(listing: listingType) { (content, _) in
             self.contentCollectionViewController.content = content
         }
     }
