@@ -38,6 +38,7 @@
 		2BB437612323F738007E8F82 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437602323F738007E8F82 /* StringExtensions.swift */; };
 		2BB4376523241494007E8F82 /* PostWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4376423241494007E8F82 /* PostWebViewController.swift */; };
 		2BB4376923255340007E8F82 /* URLEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4376823255340007E8F82 /* URLEncoder.swift */; };
+		2BB4376B232569FC007E8F82 /* 8572-liquid-blobby-loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4376A232569FC007E8F82 /* 8572-liquid-blobby-loader.json */; };
 		A3982772A961F77298CA6852 /* Pods_RedditX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE55F92B98BCA9D875FA2066 /* Pods_RedditX.framework */; };
 		E2F4319FF9035A2330D2B6A6 /* Pods_RedditXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F60F02954F6B092496BCDC /* Pods_RedditXTests.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		2BB437602323F738007E8F82 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		2BB4376423241494007E8F82 /* PostWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebViewController.swift; sourceTree = "<group>"; };
 		2BB4376823255340007E8F82 /* URLEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncoder.swift; sourceTree = "<group>"; };
+		2BB4376A232569FC007E8F82 /* 8572-liquid-blobby-loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "8572-liquid-blobby-loader.json"; sourceTree = "<group>"; };
 		4DA93989FF87F9BD11619935 /* Pods-RedditX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditX.release.xcconfig"; path = "Target Support Files/Pods-RedditX/Pods-RedditX.release.xcconfig"; sourceTree = "<group>"; };
 		60F60F02954F6B092496BCDC /* Pods_RedditXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8F5334E272987BAA8D62051 /* Pods-RedditXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditXTests.release.xcconfig"; path = "Target Support Files/Pods-RedditXTests/Pods-RedditXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		2B6F071423206F4200C129E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2BB4376A232569FC007E8F82 /* 8572-liquid-blobby-loader.json */,
 				2B6F06FB23206E7100C129E4 /* Assets.xcassets */,
 				2B6F06FD23206E7100C129E4 /* LaunchScreen.storyboard */,
 			);
@@ -378,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B6F06FF23206E7100C129E4 /* LaunchScreen.storyboard in Resources */,
+				2BB4376B232569FC007E8F82 /* 8572-liquid-blobby-loader.json in Resources */,
 				2B6F06FC23206E7100C129E4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

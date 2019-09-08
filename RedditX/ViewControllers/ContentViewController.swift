@@ -9,6 +9,11 @@
 import UIKit
 import SDWebImage
 
+protocol ContentCollectionControllerDelegate: class {
+    func collectionView(_ collectionView: ContentCollectionController, didPullToRefresh: Bool)
+    func collectionView(_ collectionView: ContentCollectionController, shouldLoadMore: Bool)
+}
+
 class ContentCollectionController: UICollectionViewController {
     
     var posts: [Content<Post>] = [] {
@@ -20,9 +25,20 @@ class ContentCollectionController: UICollectionViewController {
     
     var imageCache: [Int: ImageDownloader] = [:]
     
+    weak var delegate: ContentCollectionControllerDelegate?
+    
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
+        refreshControl.tintColor = Colors.greenX
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching More Content...", attributes: [.font: Fonts.regular(12), .foregroundColor: Colors.greenX])
+        refreshControl.layer.zPosition = -1
+
+        collectionView.refreshControl = refreshControl
         collectionView.backgroundColor = Colors.whiteX
+        collectionView.keyboardDismissMode = .onDrag
         collectionView.register(ContentCollectionViewCell.self)
     }
     
@@ -34,6 +50,15 @@ class ContentCollectionController: UICollectionViewController {
             imageCache[index] = ImageDownloader(position: index, url: url, delegate: self)
         }
         collectionView.reloadData()
+    }
+}
+
+// MARK: Refresh Control Actions
+
+extension ContentCollectionController {
+    
+    @objc func refreshAction(_ sender: UIRefreshControl) {
+        delegate?.collectionView(self, didPullToRefresh: true)
     }
 }
 
@@ -57,6 +82,10 @@ extension ContentCollectionController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         imageCache[indexPath.item]?.downloadImage()
+        
+        if indexPath.item == posts.count - 1 {
+            delegate?.collectionView(self, shouldLoadMore: true)
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

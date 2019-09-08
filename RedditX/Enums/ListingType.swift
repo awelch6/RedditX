@@ -7,8 +7,8 @@
 //
 
 enum ListingType: String {
-    case best
     case popular
+    case best
     case random
     case rising
 }

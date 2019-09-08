@@ -11,9 +11,7 @@ import NetworkX
 protocol Netoworkable {
     var baseURL: String { get set }
     var requestManager: Requestable { get set }
-    
-    func request(listing: ListingType, _ completion: @escaping RedditResponse)
-    
+        
     func request(subreddit: String, _ completion: @escaping RedditResponse)
     
     func search(query: String, _ completion: @escaping RedditSearchResponse)
@@ -32,23 +30,8 @@ struct Networker: Netoworkable {
         self.requestManager = requestManager
     }
     
-    func request(listing: ListingType, _ completion: @escaping RedditResponse) {
-        guard let url = URL(string: "\(baseURL)/r/\(listing.rawValue.lowercased()).json") else {
-            return completion([], .invalidURL)
-        }
-        
-        requestManager.request(type: Listing<Post>.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
-            switch response {
-            case .success(let model):
-                completion(model.content, nil)
-            case .failure(let error):
-                completion([], error)
-            }
-        }
-    }
-    
     func request(subreddit: String, _ completion: @escaping RedditResponse) {
-        guard let url = URL(string: "\(baseURL)\(subreddit).json") else {
+        guard let url = URL(string: "\(baseURL)/r/\(subreddit).json") else {
             return completion([], .invalidURL)
         }
         

@@ -15,7 +15,7 @@ struct Listing<T: Decodable>: Decodable {
     let data: ListingData<T>
 }
 
-// MARK Utilities
+// MARK: Utilities
 
 extension Listing {
     
@@ -46,14 +46,15 @@ struct Content<T: Decodable>: Decodable {
 // MARK: Subreddit
 
 struct Subreddit: Decodable {
-    let id, name, url: String
+    let displayName, name: String
     let created, subscribers: Int
-    let iconURL: String?
+    let iconURL, url, id: String?
 
     enum CodingKeys: String, CodingKey {
         case id, url, subscribers, created 
         case iconURL = "community_icon"
-        case name = "display_name_prefixed"
+        case displayName = "display_name_prefixed"
+        case name = "display_name"
     }
 }
 

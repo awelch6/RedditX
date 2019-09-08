@@ -9,11 +9,6 @@
 import UIKit
 import SnapKit
 
-/*
- // TODO:
- - Add loading animations
- */
-
 class MainViewController: UIViewController {
 
     lazy var searchController = UISearchController(searchResultsController: searchResultTableController)
@@ -21,6 +16,8 @@ class MainViewController: UIViewController {
     let listingCollectionView = ListingsCollectionView(flowLayout: ListingCollectionViewFlowLayout())
     let contentCollectionController = ContentCollectionController(collectionViewLayout: ContentCollectionViewCellFlowLayout())
     let networker: Netoworkable
+    
+    var currentSubreddit: String = ListingType.best.rawValue
     
     init(networker: Netoworkable = Networker()) {
         self.networker = networker
@@ -33,10 +30,15 @@ class MainViewController: UIViewController {
         setupListingCollectionView()
         setupContentCollectionViewController()
         setupSearchController()
-        
-        searchResultTableController.delegate = self
-        
+
         definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // trigger 'Popular' to load once the view is about to appear
+        listingCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .left)
+        listingCollectionView.collectionView(listingCollectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,6 +68,8 @@ extension MainViewController {
             make.top.equalTo(listingCollectionView.snp.bottom)
             make.width.centerX.bottom.equalToSuperview()
         }
+        
+        contentCollectionController.delegate = self
     }
     
     func setupSearchController() {
@@ -76,6 +80,7 @@ extension MainViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.titleView = searchController.searchBar
         navigationItem.hidesSearchBarWhenScrolling = false
+        searchResultTableController.delegate = self
     }
 }
 
@@ -109,7 +114,12 @@ extension MainViewController: UISearchResultsUpdating {
 extension MainViewController: ListingCollectionViewDelegate {
     
     func collectionView(_ collectionView: ListingsCollectionView, didSelect listingType: ListingType) {
-        networker.request(listing: listingType) { [weak self] (posts, error) in
+        
+        searchController.isActive = false
+        
+        currentSubreddit = listingType.rawValue
+        
+        networker.request(subreddit: listingType.rawValue) { [weak self] (posts, error) in
             guard let self = self, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unable to find reference to self!")")
                 return
@@ -120,13 +130,19 @@ extension MainViewController: ListingCollectionViewDelegate {
     }
 }
 
+// MARK: SearchResultTableControllerDelegate
+
 extension MainViewController: SearchResultTableControllerDelegate {
     
     func searchResult(_ searchResultTableController: SearchResultTableController, didSelect subreddit: Subreddit) {
         
         searchController.isActive = false
         
-        networker.request(subreddit: subreddit.url) { [weak self] (posts, error) in
+        if let selectedListing = listingCollectionView.selectedListing {
+            listingCollectionView.deselectItem(at: selectedListing, animated: false)
+        }
+        
+        networker.request(subreddit: subreddit.name) { [weak self] (posts, error) in
             guard let self = self, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unable to find reference to self!")")
                 return
@@ -134,6 +150,30 @@ extension MainViewController: SearchResultTableControllerDelegate {
             
             self.contentCollectionController.posts = posts
         }
+    }
+}
+
+// MARK: ContentCollectionControllerDelegate
+
+extension MainViewController: ContentCollectionControllerDelegate {
+    
+    func collectionView(_ collectionView: ContentCollectionController, didPullToRefresh: Bool) {
+        
+        networker.request(subreddit: currentSubreddit) { [weak self] (posts, error) in
+            
+            collectionView.refreshControl.endRefreshing()
+
+            guard let self = self, error == nil else {
+                print("Error: \(error?.localizedDescription ?? "Unable to find reference to self!")")
+                return
+            }
+            
+            self.contentCollectionController.posts = posts
+        }
+    }
+    
+    func collectionView(_ collectionView: ContentCollectionController, shouldLoadMore: Bool) {
+        
     }
 }
 
@@ -245,7 +285,7 @@ struct SearchViewModel {
     var attributedText: NSMutableAttributedString {
         var titleAttributes = NSMutableAttributedString()
 
-        titleAttributes = NSMutableAttributedString(string: subreddit.name + "\n",
+        titleAttributes = NSMutableAttributedString(string: subreddit.displayName + "\n",
                                                         attributes: [.font: Fonts.bold(16), .foregroundColor: Colors.blackX])
 
         if let subscriberCount = formattedSubscriberCount {
