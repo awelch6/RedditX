@@ -12,9 +12,13 @@ protocol Netoworkable {
     var baseURL: String { get set }
     var requestManager: Requestable { get set }
         
-    func request(subreddit: String, _ completion: @escaping RedditResponse)
+    func request(subreddit: String, limit: Int, after: String?, _ completion: @escaping RedditResponse)
     
     func search(query: String, _ completion: @escaping RedditSearchResponse)
+}
+
+extension Netoworkable {
+    func request(subreddit: String, limit: Int = 10, after: String? = nil, _ completion: @escaping RedditResponse) { }
 }
 
 typealias RedditResponse = ([Content<Post>], NetworkError?) -> Void
@@ -30,12 +34,19 @@ struct Networker: Netoworkable {
         self.requestManager = requestManager
     }
     
-    func request(subreddit: String, _ completion: @escaping RedditResponse) {
+    func request(subreddit: String, limit: Int = 10, after: String? = nil, _ completion: @escaping RedditResponse) {
+        
         guard let url = URL(string: "\(baseURL)/r/\(subreddit).json") else {
             return completion([], .invalidURL)
         }
         
-        requestManager.request(type: Listing<Post>.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
+        var parameters: Parameters = ["limit": limit]
+        
+        if let after = after {
+            parameters["after"] = after
+        }
+        
+        requestManager.request(type: Listing<Post>.self, url: url, method: .get, parameters: parameters, headers: nil) { (response) in
             switch response {
             case .success(let model):
                 completion(model.content, nil)

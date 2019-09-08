@@ -9,19 +9,9 @@
 import UIKit
 import SDWebImage
 
-protocol ContentCollectionControllerDelegate: class {
-    func collectionView(_ collectionView: ContentCollectionController, didPullToRefresh: Bool)
-    func collectionView(_ collectionView: ContentCollectionController, shouldLoadMore: Bool)
-}
-
 class ContentCollectionController: UICollectionViewController {
     
-    var posts: [Content<Post>] = [] {
-        didSet {
-            imageCache = [:]
-            fetchImages()
-        }
-    }
+    var posts: [Content<Post>] = []
     
     var imageCache: [Int: ImageDownloader] = [:]
     
@@ -31,25 +21,57 @@ class ContentCollectionController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
-        refreshControl.tintColor = Colors.greenX
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching More Content...", attributes: [.font: Fonts.regular(12), .foregroundColor: Colors.greenX])
-        refreshControl.layer.zPosition = -1
+        setupCollectionView()
+        setupRefreshControl()
+    }
+}
 
+// MARK: Initial UI Setup
+
+extension ContentCollectionController {
+    
+    private func setupCollectionView() {
         collectionView.refreshControl = refreshControl
         collectionView.backgroundColor = Colors.whiteX
         collectionView.keyboardDismissMode = .onDrag
         collectionView.register(ContentCollectionViewCell.self)
     }
     
-    private func fetchImages() {
+    private func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
+        refreshControl.tintColor = Colors.greenX
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching More Content...", attributes: [.font: Fonts.regular(12), .foregroundColor: Colors.greenX])
+        refreshControl.layer.zPosition = -1
+    }
+}
+
+// MARK: Utilities
+
+extension ContentCollectionController {
+    
+    public func add(posts: [Content<Post>], clearExisting: Bool) {
+        if clearExisting {
+            imageCache = [:]
+            self.posts = posts
+            fetchImages(for: posts, appended: false)
+        } else {
+            fetchImages(for: posts, appended: true)
+            self.posts.append(contentsOf: posts)
+        }
+        
+        collectionView.reloadData()
+    }
+    
+    private func fetchImages(for posts: [Content<Post>], appended: Bool) {
         for (index, post) in posts.enumerated() {
             guard let urlString = post.data.thumbnail, urlString.isValidURL, let url = URL(string: urlString) else {
                 continue
             }
+            
+            let index = appended ? index + self.posts.endIndex - 1 : index
+            
             imageCache[index] = ImageDownloader(position: index, url: url, delegate: self)
         }
-        collectionView.reloadData()
     }
 }
 
@@ -84,7 +106,7 @@ extension ContentCollectionController {
         imageCache[indexPath.item]?.downloadImage()
         
         if indexPath.item == posts.count - 1 {
-            delegate?.collectionView(self, shouldLoadMore: true)
+            delegate?.collectionView(self, shouldLoadMore: posts.last?.data.name)
         }
     }
     
