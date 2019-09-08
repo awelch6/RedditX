@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+    
     var isValidURL: Bool {
         guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
             preconditionFailure("Unable to create NSDataDetector!")

@@ -10,23 +10,15 @@ import UIKit
 
 struct ContentViewModel {
     
-    var title: String {
-        return post.title ?? ""
+    var title: String? {
+        return post.title
     }
     
     var thumbnailURL: URL? {
-        guard let thumbnail = post.preview?.images.first?.source.url, thumbnail != "self" else {
+        guard let thumbnail = post.preview?.images.first?.source.url, thumbnail.isValidURL else {
             return nil
         }
         return URL(string: thumbnail)
-    }
-    
-    var thumbnailSize: CGSize? {
-        guard let source = post.preview?.images.first?.source else {
-            return nil
-        }
-        
-        return CGSize(width: source.width, height: source.height)
     }
     
     var authorName: NSMutableAttributedString {

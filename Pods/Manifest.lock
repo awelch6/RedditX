@@ -20,13 +20,12 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - lottie-ios
     - Nimble
     - Quick
     - SDWebImage
     - SnapKit
     - SwiftLint
-  trunk:
-    - lottie-ios
 
 EXTERNAL SOURCES:
   NetworkX:

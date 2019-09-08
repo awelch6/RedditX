@@ -1,5 +1,5 @@
 //
-//  ContentCollectionViewCellFlowLayout.swift
+//  ContentCollectionViewFlowLayout.swift
 //  RedditX
 //
 //  Created by Austin Welch on 9/6/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContentCollectionViewCellFlowLayout: UICollectionViewFlowLayout {
+class ContentCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     override init() {
         super.init()
@@ -17,7 +17,7 @@ class ContentCollectionViewCellFlowLayout: UICollectionViewFlowLayout {
     
     private func setProperties() {
         let screenSize = UIScreen.main.bounds
-        estimatedItemSize =  CGSize(width: screenSize.width - 20, height: 300)
+        estimatedItemSize = CGSize(width: screenSize.width - 20, height: 300)
         scrollDirection = .vertical
         sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }

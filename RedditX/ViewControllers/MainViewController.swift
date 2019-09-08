@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     }()
     
     let listingCollectionView = ListingsCollectionView(flowLayout: ListingCollectionViewFlowLayout())
-    let contentCollectionController = ContentCollectionController(collectionViewLayout: ContentCollectionViewCellFlowLayout())
+    let contentCollectionController = ContentCollectionController(collectionViewLayout: ContentCollectionViewFlowLayout())
     let networker: Netoworkable
     
     var currentSubreddit: String = ListingType.best.rawValue

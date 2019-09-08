@@ -8,18 +8,23 @@
 
 import SDWebImage
 
+private enum ImageDownloaderError: Error {
+    case noImage
+    case unknown
+}
+
 class ImageDownloader {
     
     let position: Int
     let url: URL
     let downloader: SDWebImageDownloader
     
-    private(set) public var image: UIImage?
+    private(set) var image: UIImage?
     
-    weak var delegate: ImageDownloaderDelegate?
+    private(set) weak var delegate: ImageDownloaderDelegate?
     
-    private var isDownloading: Bool = false
-    private var isFinishedDownloading: Bool = false
+    private(set) var isDownloading: Bool = false
+    private(set) var isFinishedDownloading: Bool = false
     
     init(downloader: SDWebImageDownloader = SDWebImageDownloader(), position: Int, url: URL, delegate: ImageDownloaderDelegate) {
         self.downloader = downloader
@@ -43,8 +48,7 @@ class ImageDownloader {
                 }
                 
                 guard let image = image else {
-                    //TODO: Add ImageDownloaderError.
-                    self.delegate?.imageDownloader(self, didFailWith: NSError(), downloading: self.url, at: self.position)
+                    self.delegate?.imageDownloader(self, didFailWith: ImageDownloaderError.noImage, downloading: self.url, at: self.position)
                     return
                 }
                 

@@ -8,22 +8,6 @@
 
 import NetworkX
 
-protocol Netoworkable {
-    var baseURL: String { get set }
-    var requestManager: Requestable { get set }
-        
-    func request(subreddit: String, limit: Int, after: String?, _ completion: @escaping RedditResponse)
-    
-    func search(query: String, _ completion: @escaping RedditSearchResponse)
-}
-
-extension Netoworkable {
-    func request(subreddit: String, limit: Int = 10, after: String? = nil, _ completion: @escaping RedditResponse) { }
-}
-
-typealias RedditResponse = ([Content<Post>], NetworkError?) -> Void
-typealias RedditSearchResponse = ([Content<Subreddit>], NetworkError?) -> Void
-
 struct Networker: Netoworkable {
     
     var baseURL: String = "https://api.reddit.com"

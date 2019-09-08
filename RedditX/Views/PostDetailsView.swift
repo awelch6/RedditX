@@ -39,7 +39,7 @@ class PostDetailsView: UIView {
 
 extension PostDetailsView {
     
-    private func setupTitleLabel(_ title: String) {
+    private func setupTitleLabel(_ title: String?) {
         addSubview(titleLabel)
         
         titleLabel.snp.remakeConstraints { (make) in
