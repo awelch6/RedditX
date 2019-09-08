@@ -25,9 +25,9 @@ class ListingsCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         register(ListingCollectionViewCell.self)
-        
         backgroundColor = Colors.whiteX
         showsHorizontalScrollIndicator = false
+        alwaysBounceHorizontal = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,5 +57,19 @@ extension ListingsCollectionView: UICollectionViewDelegate, UICollectionViewData
             selectedListing = indexPath
             listingDelegate?.collectionView(self, didSelect: ListingType.allCases[indexPath.item])
         }
+    }
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension ListingsCollectionView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let cellWidth: CGFloat = 52
+        
+        let numberOfCells = floor(frame.size.width / cellWidth)
+        let edgeInsets = (frame.size.width - (CGFloat(ListingType.allCases.count) * cellWidth)) / (numberOfCells + 1)
+        
+        return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 0, right: edgeInsets)
     }
 }

@@ -9,9 +9,9 @@
 import UIKit
 import SDWebImage
 
-class ContentCollectionViewController: UICollectionViewController {
+class ContentCollectionController: UICollectionViewController {
     
-    var content: [Content] = [] {
+    var posts: [Content<Post>] = [] {
         didSet {
             imageCache = [:]
             fetchImages()
@@ -27,8 +27,8 @@ class ContentCollectionViewController: UICollectionViewController {
     }
     
     private func fetchImages() {
-        for (index, content) in content.enumerated() {
-            guard let urlString = content.post.thumbnail, urlString.isValidURL, let url = URL(string: urlString) else {
+        for (index, post) in posts.enumerated() {
+            guard let urlString = post.data.thumbnail, urlString.isValidURL, let url = URL(string: urlString) else {
                 continue
             }
             imageCache[index] = ImageDownloader(position: index, url: url, delegate: self)
@@ -39,18 +39,16 @@ class ContentCollectionViewController: UICollectionViewController {
 
 // MARK: UICollectionViewDelegate & UICollectionViewDatasource
 
-extension ContentCollectionViewController {
+extension ContentCollectionController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return content.count
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ContentCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         
-        cell.postDetailsView.thumbnail.image = nil
-        
-        var viewModel = ContentViewModel(content: content[indexPath.item])
+        var viewModel = ContentViewModel(post: posts[indexPath.item].data)
         viewModel.setImage(imageCache[indexPath.item]?.image)
         cell.display(viewModel: viewModel)
        
@@ -64,11 +62,15 @@ extension ContentCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         imageCache[indexPath.item]?.cancelDownload()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigationController?.pushViewController(PostWebViewController(post: posts[indexPath.item].data), animated: true)
+    }
 }
 
 // MARK: ImageDownloaderDelegate
 
-extension ContentCollectionViewController: ImageDownloaderDelegate {
+extension ContentCollectionController: ImageDownloaderDelegate {
     func imageDownloader(_ imageDownloader: ImageDownloader, downloaded image: UIImage, at position: Int) {
         collectionView.reloadItems(at: [IndexPath(item: position, section: 0)])
     }

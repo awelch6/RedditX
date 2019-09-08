@@ -19,7 +19,6 @@ class ListingCollectionViewFlowLayout: UICollectionViewFlowLayout {
         minimumInteritemSpacing = 12
         estimatedItemSize = CGSize(width: 40, height: 30) //estimated size needs to be a non-zero value to allow the cells to auto-size based on their text
         scrollDirection = .horizontal
-        sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
     
     required init?(coder aDecoder: NSCoder) {

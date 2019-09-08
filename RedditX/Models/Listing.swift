@@ -8,55 +8,78 @@
 
 import Foundation
 
-// MARK: - Listing
-struct Listing: Decodable {
+// MARK: Listing
+
+struct Listing<T: Decodable>: Decodable {
     let kind: String
-    let data: ListingData
+    let data: ListingData<T>
 }
 
-// MARK: - ListingData
-struct ListingData: Decodable {
-    let content: [Content]
+// MARK Utilities
+
+extension Listing {
+    
+    /// Convience variable that returns the listings content of a given type 'T'
+    var content: [Content<T>] {
+        return data.content
+    }
+}
+
+// MARK: ListingData
+
+struct ListingData<T: Decodable>: Decodable {
+    
+    let content: [Content<T>]
     
     enum CodingKeys: String, CodingKey {
         case content = "children"
     }
 }
 
-// MARK: - Child
-struct Content: Decodable {
+// MARK: Content
+
+struct Content<T: Decodable>: Decodable {
     let kind: String
-    let post: Post
-    
+    let data: T
+}
+
+// MARK: Subreddit
+
+struct Subreddit: Decodable {
+    let id, name, url: String
+    let created, subscribers: Int
+    let iconURL: String?
+
     enum CodingKeys: String, CodingKey {
-        case kind
-        case post = "data"
+        case id, url, subscribers, created 
+        case iconURL = "community_icon"
+        case name = "display_name_prefixed"
     }
 }
 
-// MARK: - DataClass
+// MARK: Post
 
 struct Post: Decodable {
     
     let author, name, subreddit, thumbnail, url: String?
-    let permalink, title: String?
+    let title: String?
     let created, downs, numComments, score, ups: Int?
     let preview: Preview?
 
     enum CodingKeys: String, CodingKey {
-        case author, created, downs, name, permalink, score, subreddit, thumbnail, title, preview, ups, url
+        case author, created, downs, name, score, subreddit, thumbnail, title, preview, ups, url
         case numComments = "num_comments"
     }
 }
 
-// MARK: - Preview
+// MARK: Preview
 
 struct Preview: Decodable {
     let images: [Image]
     let enabled: Bool
 }
 
-// MARK: - Image
+// MARK: Image
 
 struct Image: Decodable {
     let source: Source
@@ -64,7 +87,7 @@ struct Image: Decodable {
     let id: String
 }
 
-// MARK: - Source
+// MARK: Source
 
 struct Source: Decodable {
     let url: String

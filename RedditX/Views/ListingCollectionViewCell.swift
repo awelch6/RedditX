@@ -19,7 +19,6 @@ class ListingCollectionViewCell: UICollectionViewCell {
             title.textColor = isSelected ? Colors.whiteX : Colors.blackX
             contentView.layer.shadowOpacity = isSelected ? 0.4 : 0.1
             contentView.layer.shadowColor = isSelected ? Colors.greenX.cgColor : Colors.shadowX.cgColor
-            
             animateSelection()
         }
     }
@@ -35,11 +34,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.layer.cornerRadius = 5
-        contentView.layer.shadowColor = isSelected ? Colors.greenX.cgColor : Colors.shadowX.cgColor
-        contentView.layer.shadowOpacity = isSelected ? 0.4 : 0.1
-        contentView.layer.shadowOffset = CGSize(width: 1, height: 3)
-        contentView.layer.shadowRadius = 5
-        contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
+        contentView.addShadow(color: isSelected ? Colors.greenX.cgColor : Colors.shadowX.cgColor, opacity: isSelected ? 0.4 : 0.1, offset: CGSize(width: 1, height: 3), shadowRadius: 5)
     }
     
     func display(viewModel: ListingViewModel) {

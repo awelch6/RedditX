@@ -16,6 +16,8 @@ extension Resuable where Self: UIView {
     }
 }
 
+// MARK: UICollectionView
+
 extension UICollectionViewCell: Resuable { }
 
 extension UICollectionView {
@@ -27,6 +29,25 @@ extension UICollectionView {
     func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T {
         
         guard let cell = dequeueReusableCell(withReuseIdentifier: T.defaultReuseIdentifier, for: indexPath) as? T else {
+            preconditionFailure("Unable to dequeue cell!")
+        }
+        
+        return cell
+    }
+}
+
+// MARK: UITableView
+
+extension UITableViewCell: Resuable { }
+
+extension UITableView {
+    
+    func register<T: UITableViewCell>(_: T.Type) {
+        register(T.self, forCellReuseIdentifier: T.defaultReuseIdentifier)
+    }
+    
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: T.defaultReuseIdentifier, for: indexPath) as? T else {
             preconditionFailure("Unable to dequeue cell!")
         }
         

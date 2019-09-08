@@ -14,14 +14,13 @@ protocol Netoworkable {
     
     func request(listing: ListingType, _ completion: @escaping RedditResponse)
     
-    func request(subreddit: Subreddit, _ completion: @escaping RedditResponse)
+    func request(subreddit: String, _ completion: @escaping RedditResponse)
     
-    func search(query: String, _ cometion: @escaping RedditSearchResponse)
+    func search(query: String, _ completion: @escaping RedditSearchResponse)
 }
 
-typealias Subreddit = String
-typealias RedditResponse = ([Content], NetworkError?) -> Void
-typealias RedditSearchResponse = ([String]) -> Void
+typealias RedditResponse = ([Content<Post>], NetworkError?) -> Void
+typealias RedditSearchResponse = ([Content<Subreddit>], NetworkError?) -> Void
 
 struct Networker: Netoworkable {
     
@@ -29,7 +28,7 @@ struct Networker: Netoworkable {
     
     var requestManager: Requestable
     
-    init(requestManager: Requestable = RequestManager()) {
+    init(requestManager: Requestable = RequestManager(encoder: URLParameterEncoder())) {
         self.requestManager = requestManager
     }
     
@@ -38,32 +37,50 @@ struct Networker: Netoworkable {
             return completion([], .invalidURL)
         }
         
-        requestManager.request(type: Listing.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
+        requestManager.request(type: Listing<Post>.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
             switch response {
             case .success(let model):
-                completion(model.data.content, nil)
+                completion(model.content, nil)
             case .failure(let error):
                 completion([], error)
             }
         }
     }
     
-    func request(subreddit: Subreddit, _ completion: @escaping RedditResponse) {
-        guard let url = URL(string: "\(baseURL)/r/\(subreddit).json") else {
+    func request(subreddit: String, _ completion: @escaping RedditResponse) {
+        guard let url = URL(string: "\(baseURL)\(subreddit).json") else {
             return completion([], .invalidURL)
         }
         
-        requestManager.request(type: Listing.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
+        requestManager.request(type: Listing<Post>.self, url: url, method: .get, parameters: nil, headers: nil) { (response) in
             switch response {
             case .success(let model):
-                completion(model.data.content, nil)
+                completion(model.content, nil)
             case .failure(let error):
                 completion([], error)
             }
         }
     }
     
-    func search(query: String, _ cometion: @escaping RedditSearchResponse) {
+    func search(query: String, _ completion: @escaping RedditSearchResponse) {
         
+        guard let url = URL(string: "\(baseURL)/subreddits/search.json") else {
+            return completion([], .invalidURL)
+        }
+        
+        let parameters: Parameters = [
+            "q": query,
+            "sort": "top"
+        ]
+        
+        requestManager.request(type: Listing<Subreddit>.self, url: url, method: .get, parameters: parameters, headers: nil) { (response) in
+            
+            switch response {
+            case .success(let model):
+                completion(model.content, nil)
+            case .failure(let error):
+                completion([], error)
+            }
+        }
     }
 }

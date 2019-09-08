@@ -8,12 +8,9 @@
 
 enum ListingType: String {
     case best
-    case controversial
-    case hot
-    case new
+    case popular
     case random
     case rising
-    case top
 }
 
 // MARK: Case Iterable

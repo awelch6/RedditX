@@ -11,18 +11,18 @@ import UIKit
 struct ContentViewModel {
     
     var title: String {
-        return content.post.title ?? ""
+        return post.title ?? ""
     }
     
     var thumbnailURL: URL? {
-        guard let thumbnail = content.post.preview?.images.first?.source.url, thumbnail != "self" else {
+        guard let thumbnail = post.preview?.images.first?.source.url, thumbnail != "self" else {
             return nil
         }
         return URL(string: thumbnail)
     }
     
     var thumbnailSize: CGSize? {
-        guard let source = content.post.preview?.images.first?.source else {
+        guard let source = post.preview?.images.first?.source else {
             return nil
         }
         
@@ -32,12 +32,12 @@ struct ContentViewModel {
     var authorName: NSMutableAttributedString {
         var titleAttributes = NSMutableAttributedString()
         
-        if let name = content.post.author {
+        if let name = post.author {
             titleAttributes = NSMutableAttributedString(string: "u/\(name)" + "\n",
                                                         attributes: [.font: Fonts.bold(16), .foregroundColor: Colors.blackX])
         }
         
-        if let time = content.post.created?.toHumanReadableTime() {
+        if let time = post.created?.toHumanReadableTime() {
             let attributes = NSMutableAttributedString(string: time, attributes: [.font: Fonts.regular(12), .foregroundColor: Colors.grayX])
             titleAttributes.append(attributes)
         }
@@ -47,10 +47,10 @@ struct ContentViewModel {
     
     private(set) public var image: UIImage?
     
-    private let content: Content
+    private let post: Post
     
-    init(content: Content) {
-        self.content = content
+    init(post: Post) {
+        self.post = post
     }
     
     public mutating func setImage(_ image: UIImage?) {

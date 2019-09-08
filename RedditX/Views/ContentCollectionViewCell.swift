@@ -28,15 +28,12 @@ class ContentCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
 
         contentView.layer.cornerRadius = 10
-        contentView.layer.shadowColor = Colors.shadowX.cgColor
-        contentView.layer.shadowOpacity = 0.2
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        contentView.layer.shadowRadius = 5
-        contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
-        
+        contentView.addShadow(color: Colors.shadowX.cgColor, opacity: 0.2, offset: CGSize(width: 0, height: 2), shadowRadius: 5)
     }
     
     func display(viewModel: ContentViewModel) {
+        postDetailsView.thumbnail.image = nil //clear out any reused image when cell is being displayed.
+        
         authorProfileView.thumbnail.image = UIImage(named: "reddit")
         authorProfileView.authorDetailsLabel.attributedText = viewModel.authorName
         postDetailsView.display(viewModel: viewModel)
