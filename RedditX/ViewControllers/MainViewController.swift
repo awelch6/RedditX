@@ -155,6 +155,7 @@ extension MainViewController: SearchResultTableControllerDelegate {
         searchController.isActive = false
         
         if let selectedListing = listingCollectionView.selectedListing {
+            listingCollectionView.selectedListing = nil
             listingCollectionView.deselectItem(at: selectedListing, animated: false)
         }
         

@@ -15,12 +15,10 @@ class ContentCollectionControllerTests: QuickSpec {
     
     override func spec() {
         
+        let validPost = MockObjects.post(thumbnail: "wwww.validURL.com")
+        
         var contentViewController: ContentCollectionController!
         let mockDelegate = MockContentCollectionControllerDelegate()
-        
-        let source = Source(url: "www.validURL.com", width: 10, height: 10)
-        let image = Image(source: source, resolutions: [], id: "123")
-        let preview = Preview(images: [image], enabled: true)
         
         context("when a new ContentCollectionController is initialized") {
             
@@ -62,18 +60,15 @@ class ContentCollectionControllerTests: QuickSpec {
         }
         
         context("when add(_:_:) is called") {
+              let validPost = MockObjects.post(thumbnail: "wwww.validURL.com")
             
             it("should clear existing imageCache if add(_:_:) is called with true for 'clearExisting'") {
-                let validPost = MockObjects.post(preview: preview)
-                
                 contentViewController.add(posts: [validPost, validPost, validPost], clearExisting: true)
                 
                 expect(contentViewController.imageCache.keys.count).to(equal(3))
             }
             
             it("should append new posts to the existing imageCache if add(_:_:) is called with false for 'clearExisting'") {
-                let validPost = MockObjects.post(preview: preview)
-                
                 contentViewController.add(posts: [validPost, validPost, validPost], clearExisting: true) //simulate images already existing in cache
                 
                 contentViewController.add(posts: [validPost, validPost, validPost], clearExisting: false)
@@ -82,8 +77,6 @@ class ContentCollectionControllerTests: QuickSpec {
             }
             
             it("should only add imageDownloaders to the imageCache if they have a valid URL") {
-               
-                let validPost = MockObjects.post(preview: preview)
                 let invalidPost = MockObjects.post()
                 
                 contentViewController.add(posts: [validPost, invalidPost, validPost], clearExisting: true)
@@ -122,7 +115,6 @@ class ContentCollectionControllerTests: QuickSpec {
             }
             
             it("should call shouldLoadMore if the collectionView is about to reach the end") {
-                let validPost = MockObjects.post(preview: preview)
                 
                 contentViewController.add(posts: [validPost, validPost, validPost], clearExisting: true)
                 
@@ -132,7 +124,6 @@ class ContentCollectionControllerTests: QuickSpec {
             }
 
             it("should call push a webView controller onto the stack when a cell is selected") {
-                let validPost = MockObjects.post(preview: preview)
                 
                 contentViewController.add(posts: [validPost, validPost, validPost], clearExisting: true)
                 

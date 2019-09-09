@@ -64,7 +64,7 @@ extension ContentCollectionController {
     
     private func fetchImages(for posts: [Content<Post>], appended: Bool) {
         for (index, post) in posts.enumerated() {
-            guard let urlString = post.data.preview?.images.first?.source.url, urlString.isValidURL, let url = URL(string: urlString) else {
+            guard let urlString = post.data.thumbnail, urlString.isValidURL, let url = URL(string: urlString) else {
                 continue
             }
             
