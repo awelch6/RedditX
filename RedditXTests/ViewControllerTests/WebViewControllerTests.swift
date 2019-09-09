@@ -1,5 +1,5 @@
 //
-//  PostWebViewController.swift
+//  WebViewControllerTests.swift
 //  RedditXTests
 //
 //  Created by Austin Welch on 9/8/19.
@@ -12,7 +12,7 @@ import WebKit
 
 @testable import RedditX
 
-class PostWebViewController: QuickSpec {
+class WebViewControllerTests: QuickSpec {
     
     override func spec() {
         var webViewController: WebViewController!

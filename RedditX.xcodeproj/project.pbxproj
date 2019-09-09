@@ -66,7 +66,7 @@
 		2BB437A72325CCBF007E8F82 /* ContentCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */; };
 		2BB437A92325CF7D007E8F82 /* MockPostDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A82325CF7D007E8F82 /* MockPostDetailsView.swift */; };
 		2BB437AD2325D075007E8F82 /* SearchResultTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */; };
-		2BB437AF2325D43B007E8F82 /* PostWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */; };
+		2BB437AF2325D43B007E8F82 /* WebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AE2325D43B007E8F82 /* WebViewControllerTests.swift */; };
 		2BB437B12325D8A0007E8F82 /* MockWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B02325D8A0007E8F82 /* MockWebView.swift */; };
 		2BB437B32325D93D007E8F82 /* SearchResultTableControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */; };
 		2BB437B52325E106007E8F82 /* MockTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B42325E106007E8F82 /* MockTableView.swift */; };
@@ -152,7 +152,7 @@
 		2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		2BB437A82325CF7D007E8F82 /* MockPostDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPostDetailsView.swift; sourceTree = "<group>"; };
 		2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCellTests.swift; sourceTree = "<group>"; };
-		2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebViewController.swift; sourceTree = "<group>"; };
+		2BB437AE2325D43B007E8F82 /* WebViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerTests.swift; sourceTree = "<group>"; };
 		2BB437B02325D8A0007E8F82 /* MockWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebView.swift; sourceTree = "<group>"; };
 		2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableControllerTests.swift; sourceTree = "<group>"; };
 		2BB437B42325E106007E8F82 /* MockTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableView.swift; sourceTree = "<group>"; };
@@ -250,29 +250,15 @@
 		2B6F070823206E7100C129E4 /* RedditXTests */ = {
 			isa = PBXGroup;
 			children = (
+				2BB437C12325ED42007E8F82 /* LayoutTests */,
+				2BB437C02325ED36007E8F82 /* Protocols */,
+				2BB437BF2325ED08007E8F82 /* ViewControllerTests */,
+				2BB437BE2325ECF7007E8F82 /* ViewModelTests */,
+				2BB437BD2325ECB7007E8F82 /* ViewTests */,
+				2BB437BC2325EC94007E8F82 /* UtilitiesTests */,
 				2BB4377B232596D2007E8F82 /* Mocks */,
-				2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */,
-				2BB4377623258583007E8F82 /* ImageDownloaderTests.swift */,
-				2BB437822325A1D9007E8F82 /* UIViewControllerExtensionsTests.swift */,
-				2BB437802325975C007E8F82 /* URLEncoderTests.swift */,
 				2B6F070B23206E7100C129E4 /* Info.plist */,
-				2BB4377923258C4F007E8F82 /* TestResetable.swift */,
-				2BB437862325A412007E8F82 /* UIViewExtenstionsTests.swift */,
-				2BB437882325A6BB007E8F82 /* StringExtensionsTests.swift */,
 				2BB4378A2325A82C007E8F82 /* NetworkerTests.swift */,
-				2BB437942325B8C9007E8F82 /* ListingCollectionViewFlowLayoutTests.swift */,
-				2BB437962325B9E6007E8F82 /* ContentCollectionViewFlowLayoutTests.swift */,
-				2BB4379A2325BAF0007E8F82 /* ListingViewModelTests.swift */,
-				2BB4379E2325C10F007E8F82 /* SearchViewModelTests.swift */,
-				2BB4379C2325BCA8007E8F82 /* ContentViewModelTests.swift */,
-				2BB437A42325C9E2007E8F82 /* AuthorProfileViewTests.swift */,
-				2BB437A02325C4BC007E8F82 /* ListingCollectionViewTests.swift */,
-				2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */,
-				2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */,
-				2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */,
-				2BB437B02325D8A0007E8F82 /* MockWebView.swift */,
-				2BB437B62325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift */,
-				2BB437B82325E1BC007E8F82 /* ContentCollectionControllerTests.swift */,
 			);
 			path = RedditXTests;
 			sourceTree = "<group>";
@@ -371,6 +357,8 @@
 		2BB4377B232596D2007E8F82 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				2BB437B62325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift */,
+				2BB437B02325D8A0007E8F82 /* MockWebView.swift */,
 				2BB4377C232596DF007E8F82 /* MockSDWebImageDownloader.swift */,
 				2BB4377E232596EF007E8F82 /* MockImageDownloaderDelegate.swift */,
 				2BB437842325A3E8007E8F82 /* MockViewController.swift */,
@@ -382,6 +370,66 @@
 				2BB437BA2325EBAE007E8F82 /* MockContentCollectionControllerDelegate.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		2BB437BC2325EC94007E8F82 /* UtilitiesTests */ = {
+			isa = PBXGroup;
+			children = (
+				2BB437882325A6BB007E8F82 /* StringExtensionsTests.swift */,
+				2BB437802325975C007E8F82 /* URLEncoderTests.swift */,
+				2BB4377623258583007E8F82 /* ImageDownloaderTests.swift */,
+			);
+			path = UtilitiesTests;
+			sourceTree = "<group>";
+		};
+		2BB437BD2325ECB7007E8F82 /* ViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				2BB437A42325C9E2007E8F82 /* AuthorProfileViewTests.swift */,
+				2BB437A02325C4BC007E8F82 /* ListingCollectionViewTests.swift */,
+				2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */,
+				2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */,
+				2BB437862325A412007E8F82 /* UIViewExtenstionsTests.swift */,
+			);
+			path = ViewTests;
+			sourceTree = "<group>";
+		};
+		2BB437BE2325ECF7007E8F82 /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				2BB4379A2325BAF0007E8F82 /* ListingViewModelTests.swift */,
+				2BB4379E2325C10F007E8F82 /* SearchViewModelTests.swift */,
+				2BB4379C2325BCA8007E8F82 /* ContentViewModelTests.swift */,
+			);
+			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
+		2BB437BF2325ED08007E8F82 /* ViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */,
+				2BB437822325A1D9007E8F82 /* UIViewControllerExtensionsTests.swift */,
+				2BB437B82325E1BC007E8F82 /* ContentCollectionControllerTests.swift */,
+				2BB437AE2325D43B007E8F82 /* WebViewControllerTests.swift */,
+			);
+			path = ViewControllerTests;
+			sourceTree = "<group>";
+		};
+		2BB437C02325ED36007E8F82 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2BB4377923258C4F007E8F82 /* TestResetable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		2BB437C12325ED42007E8F82 /* LayoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				2BB437942325B8C9007E8F82 /* ListingCollectionViewFlowLayoutTests.swift */,
+				2BB437962325B9E6007E8F82 /* ContentCollectionViewFlowLayoutTests.swift */,
+			);
+			path = LayoutTests;
 			sourceTree = "<group>";
 		};
 		7A173E6EED204B05DA40B451 /* Pods */ = {
@@ -660,7 +708,7 @@
 				2BB4378B2325A82C007E8F82 /* NetworkerTests.swift in Sources */,
 				2BB437A12325C4BC007E8F82 /* ListingCollectionViewTests.swift in Sources */,
 				2BB4377723258583007E8F82 /* ImageDownloaderTests.swift in Sources */,
-				2BB437AF2325D43B007E8F82 /* PostWebViewController.swift in Sources */,
+				2BB437AF2325D43B007E8F82 /* WebViewControllerTests.swift in Sources */,
 				2BB437B72325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift in Sources */,
 				2BB4377F232596EF007E8F82 /* MockImageDownloaderDelegate.swift in Sources */,
 				2BB437B32325D93D007E8F82 /* SearchResultTableControllerTests.swift in Sources */,
