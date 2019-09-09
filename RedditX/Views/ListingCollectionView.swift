@@ -19,12 +19,16 @@ class ListingsCollectionView: UICollectionView {
     init(flowLayout: UICollectionViewFlowLayout = ListingCollectionViewFlowLayout()) {
         self.flowLayout = flowLayout
         super.init(frame: .zero, collectionViewLayout: flowLayout)
-        
+        setProperties()
+    }
+    
+    private func setProperties() {
         translatesAutoresizingMaskIntoConstraints = false
         
         delegate = self
         dataSource = self
         register(ListingCollectionViewCell.self)
+        
         backgroundColor = Colors.whiteX
         showsHorizontalScrollIndicator = false
         alwaysBounceHorizontal = true

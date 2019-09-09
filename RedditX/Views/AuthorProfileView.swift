@@ -21,8 +21,8 @@ class AuthorProfileView: UIView {
         super.init(frame: .zero)
         
         setProperties()
-        setupProfileImageView()
-        setupPostDetailsLabel()
+        setupThumbnailImageView()
+        setupAuthorDetailsLabel()
     }
     
     override func layoutSubviews() {
@@ -46,7 +46,7 @@ class AuthorProfileView: UIView {
 
 extension AuthorProfileView {
     
-    private func setupProfileImageView() {
+    private func setupThumbnailImageView() {
         addSubview(thumbnail)
         
         thumbnail.snp.makeConstraints { (make) in
@@ -56,7 +56,7 @@ extension AuthorProfileView {
         }
     }
     
-    private func setupPostDetailsLabel() {
+    private func setupAuthorDetailsLabel() {
         addSubview(authorDetailsLabel)
         
         authorDetailsLabel.snp.makeConstraints { (make) in

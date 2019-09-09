@@ -30,13 +30,11 @@
 		2BB437502322DA23007E8F82 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4374F2322DA23007E8F82 /* ContentCollectionViewCell.swift */; };
 		2BB437522322DA4C007E8F82 /* ContentCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437512322DA4C007E8F82 /* ContentCollectionViewFlowLayout.swift */; };
 		2BB437542322E191007E8F82 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437532322E191007E8F82 /* UIViewExtensions.swift */; };
-		2BB437562322E2E7007E8F82 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437552322E2E7007E8F82 /* ActionButton.swift */; };
 		2BB437582323D93E007E8F82 /* PostDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437572323D93E007E8F82 /* PostDetailsView.swift */; };
-		2BB4375A2323F5E3007E8F82 /* ActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437592323F5E3007E8F82 /* ActionButtonView.swift */; };
 		2BB4375D2323F6A8007E8F82 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4375C2323F6A8007E8F82 /* ImageDownloader.swift */; };
 		2BB4375F2323F70F007E8F82 /* ImageDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4375E2323F70F007E8F82 /* ImageDownloaderDelegate.swift */; };
 		2BB437612323F738007E8F82 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437602323F738007E8F82 /* StringExtensions.swift */; };
-		2BB4376523241494007E8F82 /* PostWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4376423241494007E8F82 /* PostWebViewController.swift */; };
+		2BB4376523241494007E8F82 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4376423241494007E8F82 /* WebViewController.swift */; };
 		2BB4376923255340007E8F82 /* URLEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4376823255340007E8F82 /* URLEncoder.swift */; };
 		2BB4376B232569FC007E8F82 /* 8572-liquid-blobby-loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4376A232569FC007E8F82 /* 8572-liquid-blobby-loader.json */; };
 		2BB4376D2325778B007E8F82 /* SearchResultTableControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4376C2325778B007E8F82 /* SearchResultTableControllerDelegate.swift */; };
@@ -62,6 +60,14 @@
 		2BB4379B2325BAF0007E8F82 /* ListingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4379A2325BAF0007E8F82 /* ListingViewModelTests.swift */; };
 		2BB4379D2325BCA8007E8F82 /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4379C2325BCA8007E8F82 /* ContentViewModelTests.swift */; };
 		2BB4379F2325C10F007E8F82 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4379E2325C10F007E8F82 /* SearchViewModelTests.swift */; };
+		2BB437A12325C4BC007E8F82 /* ListingCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A02325C4BC007E8F82 /* ListingCollectionViewTests.swift */; };
+		2BB437A32325C920007E8F82 /* MockListingCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A22325C920007E8F82 /* MockListingCollectionViewDelegate.swift */; };
+		2BB437A52325C9E2007E8F82 /* AuthorProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A42325C9E2007E8F82 /* AuthorProfileViewTests.swift */; };
+		2BB437A72325CCBF007E8F82 /* ContentCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */; };
+		2BB437A92325CF7D007E8F82 /* MockPostDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437A82325CF7D007E8F82 /* MockPostDetailsView.swift */; };
+		2BB437AD2325D075007E8F82 /* SearchResultTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */; };
+		2BB437AF2325D43B007E8F82 /* PostWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */; };
+		2BB437B12325D8A0007E8F82 /* MockWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B02325D8A0007E8F82 /* MockWebView.swift */; };
 		A3982772A961F77298CA6852 /* Pods_RedditX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE55F92B98BCA9D875FA2066 /* Pods_RedditX.framework */; };
 		E2F4319FF9035A2330D2B6A6 /* Pods_RedditXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F60F02954F6B092496BCDC /* Pods_RedditXTests.framework */; };
 /* End PBXBuildFile section */
@@ -105,13 +111,11 @@
 		2BB4374F2322DA23007E8F82 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		2BB437512322DA4C007E8F82 /* ContentCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		2BB437532322E191007E8F82 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		2BB437552322E2E7007E8F82 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		2BB437572323D93E007E8F82 /* PostDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsView.swift; sourceTree = "<group>"; };
-		2BB437592323F5E3007E8F82 /* ActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonView.swift; sourceTree = "<group>"; };
 		2BB4375C2323F6A8007E8F82 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		2BB4375E2323F70F007E8F82 /* ImageDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderDelegate.swift; sourceTree = "<group>"; };
 		2BB437602323F738007E8F82 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		2BB4376423241494007E8F82 /* PostWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebViewController.swift; sourceTree = "<group>"; };
+		2BB4376423241494007E8F82 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		2BB4376823255340007E8F82 /* URLEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncoder.swift; sourceTree = "<group>"; };
 		2BB4376A232569FC007E8F82 /* 8572-liquid-blobby-loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "8572-liquid-blobby-loader.json"; sourceTree = "<group>"; };
 		2BB4376C2325778B007E8F82 /* SearchResultTableControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableControllerDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,14 @@
 		2BB4379A2325BAF0007E8F82 /* ListingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewModelTests.swift; sourceTree = "<group>"; };
 		2BB4379C2325BCA8007E8F82 /* ContentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
 		2BB4379E2325C10F007E8F82 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
+		2BB437A02325C4BC007E8F82 /* ListingCollectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCollectionViewTests.swift; sourceTree = "<group>"; };
+		2BB437A22325C920007E8F82 /* MockListingCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockListingCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		2BB437A42325C9E2007E8F82 /* AuthorProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorProfileViewTests.swift; sourceTree = "<group>"; };
+		2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCellTests.swift; sourceTree = "<group>"; };
+		2BB437A82325CF7D007E8F82 /* MockPostDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPostDetailsView.swift; sourceTree = "<group>"; };
+		2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCellTests.swift; sourceTree = "<group>"; };
+		2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebViewController.swift; sourceTree = "<group>"; };
+		2BB437B02325D8A0007E8F82 /* MockWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebView.swift; sourceTree = "<group>"; };
 		4DA93989FF87F9BD11619935 /* Pods-RedditX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditX.release.xcconfig"; path = "Target Support Files/Pods-RedditX/Pods-RedditX.release.xcconfig"; sourceTree = "<group>"; };
 		60F60F02954F6B092496BCDC /* Pods_RedditXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8F5334E272987BAA8D62051 /* Pods-RedditXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditXTests.release.xcconfig"; path = "Target Support Files/Pods-RedditXTests/Pods-RedditXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -242,6 +254,12 @@
 				2BB4379A2325BAF0007E8F82 /* ListingViewModelTests.swift */,
 				2BB4379E2325C10F007E8F82 /* SearchViewModelTests.swift */,
 				2BB4379C2325BCA8007E8F82 /* ContentViewModelTests.swift */,
+				2BB437A42325C9E2007E8F82 /* AuthorProfileViewTests.swift */,
+				2BB437A02325C4BC007E8F82 /* ListingCollectionViewTests.swift */,
+				2BB437A62325CCBF007E8F82 /* ContentCollectionViewCellTests.swift */,
+				2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */,
+				2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */,
+				2BB437B02325D8A0007E8F82 /* MockWebView.swift */,
 			);
 			path = RedditXTests;
 			sourceTree = "<group>";
@@ -261,7 +279,7 @@
 			children = (
 				2B6F06F623206E7000C129E4 /* MainViewController.swift */,
 				2BB437422322C4D5007E8F82 /* ContentViewController.swift */,
-				2BB4376423241494007E8F82 /* PostWebViewController.swift */,
+				2BB4376423241494007E8F82 /* WebViewController.swift */,
 				2BB4376E232577AA007E8F82 /* SearchResultTableController.swift */,
 			);
 			path = ViewControllers;
@@ -274,9 +292,7 @@
 				2BB437382322AFBF007E8F82 /* ListingCollectionViewCell.swift */,
 				2BB4374D2322D9F6007E8F82 /* AuthorProfileView.swift */,
 				2BB4374F2322DA23007E8F82 /* ContentCollectionViewCell.swift */,
-				2BB437552322E2E7007E8F82 /* ActionButton.swift */,
 				2BB437572323D93E007E8F82 /* PostDetailsView.swift */,
-				2BB437592323F5E3007E8F82 /* ActionButtonView.swift */,
 				2BB43772232577FF007E8F82 /* SearchResultTableViewCell.swift */,
 			);
 			path = Views;
@@ -347,6 +363,8 @@
 				2BB437842325A3E8007E8F82 /* MockViewController.swift */,
 				2BB4378C2325ACB3007E8F82 /* MockObjects.swift */,
 				2BB437902325B853007E8F82 /* MockNetworkable.swift */,
+				2BB437A22325C920007E8F82 /* MockListingCollectionViewDelegate.swift */,
+				2BB437A82325CF7D007E8F82 /* MockPostDetailsView.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -578,15 +596,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB4375D2323F6A8007E8F82 /* ImageDownloader.swift in Sources */,
-				2BB4376523241494007E8F82 /* PostWebViewController.swift in Sources */,
+				2BB4376523241494007E8F82 /* WebViewController.swift in Sources */,
 				2BB4376D2325778B007E8F82 /* SearchResultTableControllerDelegate.swift in Sources */,
 				2BB4372F2322AF0F007E8F82 /* Resuable.swift in Sources */,
 				2BB437542322E191007E8F82 /* UIViewExtensions.swift in Sources */,
 				2BB4373E2322B073007E8F82 /* Listing.swift in Sources */,
-				2BB437562322E2E7007E8F82 /* ActionButton.swift in Sources */,
 				2BB437332322AF47007E8F82 /* ListingType.swift in Sources */,
 				2BB4374C2322D9DC007E8F82 /* ContentViewModel.swift in Sources */,
-				2BB4375A2323F5E3007E8F82 /* ActionButtonView.swift in Sources */,
 				2BB437522322DA4C007E8F82 /* ContentCollectionViewFlowLayout.swift in Sources */,
 				2BB43773232577FF007E8F82 /* SearchResultTableViewCell.swift in Sources */,
 				2BB437372322AF89007E8F82 /* ListingCollectionViewDelegate.swift in Sources */,
@@ -620,20 +636,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB4379D2325BCA8007E8F82 /* ContentViewModelTests.swift in Sources */,
+				2BB437A52325C9E2007E8F82 /* AuthorProfileViewTests.swift in Sources */,
 				2BB437912325B853007E8F82 /* MockNetworkable.swift in Sources */,
 				2BB437892325A6BB007E8F82 /* StringExtensionsTests.swift in Sources */,
 				2BB4379B2325BAF0007E8F82 /* ListingViewModelTests.swift in Sources */,
 				2BB437972325B9E6007E8F82 /* ContentCollectionViewFlowLayoutTests.swift in Sources */,
 				2BB4378B2325A82C007E8F82 /* NetworkerTests.swift in Sources */,
+				2BB437A12325C4BC007E8F82 /* ListingCollectionViewTests.swift in Sources */,
 				2BB4377723258583007E8F82 /* ImageDownloaderTests.swift in Sources */,
+				2BB437AF2325D43B007E8F82 /* PostWebViewController.swift in Sources */,
 				2BB4377F232596EF007E8F82 /* MockImageDownloaderDelegate.swift in Sources */,
 				2BB437832325A1D9007E8F82 /* UIViewControllerExtensionsTests.swift in Sources */,
+				2BB437B12325D8A0007E8F82 /* MockWebView.swift in Sources */,
 				2BB437852325A3E8007E8F82 /* MockViewController.swift in Sources */,
+				2BB437AD2325D075007E8F82 /* SearchResultTableViewCellTests.swift in Sources */,
 				2BB4377A23258C4F007E8F82 /* TestResetable.swift in Sources */,
 				2BB437812325975C007E8F82 /* URLEncoderTests.swift in Sources */,
 				2BB4377D232596DF007E8F82 /* MockSDWebImageDownloader.swift in Sources */,
+				2BB437A72325CCBF007E8F82 /* ContentCollectionViewCellTests.swift in Sources */,
 				2BB4378D2325ACB3007E8F82 /* MockObjects.swift in Sources */,
+				2BB437A92325CF7D007E8F82 /* MockPostDetailsView.swift in Sources */,
 				2BB4379F2325C10F007E8F82 /* SearchViewModelTests.swift in Sources */,
+				2BB437A32325C920007E8F82 /* MockListingCollectionViewDelegate.swift in Sources */,
 				2BB437952325B8C9007E8F82 /* ListingCollectionViewFlowLayoutTests.swift in Sources */,
 				2BB437872325A412007E8F82 /* UIViewExtenstionsTests.swift in Sources */,
 			);

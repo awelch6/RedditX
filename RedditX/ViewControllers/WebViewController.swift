@@ -9,17 +9,15 @@
 import UIKit
 import WebKit
 
-class PostWebViewController: UIViewController {
+class WebViewController: UIViewController {
     
-    private let post: Post
+    let post: Post
     
-    lazy var webView: WKWebView = {
-        let configuration = WKWebViewConfiguration()
-        return WKWebView(frame: .zero, configuration: configuration)
-    }()
+    let webView: WKWebView
     
-    init(post: Post) {
+    init(webView: WKWebView = WKWebView(), post: Post) {
         self.post = post
+        self.webView = webView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,7 +33,7 @@ class PostWebViewController: UIViewController {
 
 // MARK: Initial UI Setup
 
-extension PostWebViewController {
+extension WebViewController {
     func setupWebView() {
         view.addSubview(webView)
         

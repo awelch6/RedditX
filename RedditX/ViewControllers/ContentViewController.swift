@@ -115,7 +115,7 @@ extension ContentCollectionController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.pushViewController(PostWebViewController(post: posts[indexPath.item].data), animated: true)
+        navigationController?.pushViewController(WebViewController(post: posts[indexPath.item].data), animated: true)
     }
 }
 

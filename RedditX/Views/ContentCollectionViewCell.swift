@@ -10,18 +10,16 @@ import UIKit
 
 class ContentCollectionViewCell: UICollectionViewCell {
     
-    let authorProfileView = AuthorProfileView()
-    let postDetailsView = PostDetailsView()
-    let actionButtonView = ActionButtonView()
+    var authorProfileView = AuthorProfileView()
+    var postDetailsView = PostDetailsView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = Colors.lightGrayX
+        
         setupAuthorProfileView()
         setupPostDetailsView()
-        setupActionButtonView()
-        
-        contentView.backgroundColor = Colors.lightGrayX
     }
     
     override func layoutSubviews() {
@@ -61,32 +59,7 @@ extension ContentCollectionViewCell {
         
         postDetailsView.snp.makeConstraints { (make) in
             make.top.equalTo(authorProfileView.snp.bottom)
-            make.centerX.width.equalToSuperview()
+            make.centerX.width.bottom.equalToSuperview()
         }
-    }
-    
-    private func setupActionButtonView() {
-        contentView.addSubview(actionButtonView)
-        
-        actionButtonView.snp.makeConstraints { (make) in
-            make.top.equalTo(postDetailsView.snp.bottom).offset(10)
-            make.width.centerX.bottom.equalToSuperview()
-        }
-        
-        actionButtonView.upvoteButton.addTarget(self, action: #selector(upvoteButtonPressed(_:)), for: .touchUpInside)
-        actionButtonView.downvoteButton.addTarget(self, action: #selector(downvoteButtonPressed(_:)), for: .touchUpInside)
-    }
-}
-
-// MARK: Button Actions
-
-extension ContentCollectionViewCell {
-    
-    @objc func upvoteButtonPressed(_ sender: UIButton) {
-        
-    }
-    
-    @objc func downvoteButtonPressed(_ sender: UIButton) {
-        
     }
 }

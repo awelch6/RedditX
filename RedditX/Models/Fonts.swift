@@ -10,9 +10,7 @@ import UIKit.UIFont
 
 /// A collection of common UIFonts used through the application.
 struct Fonts {
-    
-    //TODO: Figure out how to insert a dependency to allow for better testing.
-    
+        
     /// returns the 'Verdana' font for the given size. Otherwise, if the font does not exist, it throws a precondition failure.
     public static func regular(_ size: CGFloat) -> UIFont {
         guard let font = UIFont(name: "Verdana", size: size) else {
