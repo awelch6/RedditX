@@ -11,7 +11,7 @@ import SDWebImage
 
 class ContentCollectionController: UICollectionViewController {
     
-    var posts: [Content<Post>] = []
+    private(set) var posts: [Content<Post>] = []
     
     var imageCache: [Int: ImageDownloader] = [:]
     
@@ -64,11 +64,11 @@ extension ContentCollectionController {
     
     private func fetchImages(for posts: [Content<Post>], appended: Bool) {
         for (index, post) in posts.enumerated() {
-            guard let urlString = post.data.thumbnail, urlString.isValidURL, let url = URL(string: urlString) else {
+            guard let urlString = post.data.preview?.images.first?.source.url, urlString.isValidURL, let url = URL(string: urlString) else {
                 continue
             }
             
-            let index = appended ? index + self.posts.endIndex - 1 : index
+            let index = appended ? index + self.posts.endIndex : index
             
             imageCache[index] = ImageDownloader(position: index, url: url, delegate: self)
         }

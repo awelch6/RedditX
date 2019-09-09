@@ -1,5 +1,5 @@
 //
-//  PostWebViewController.swift
+//  WebViewController.swift
 //  RedditX
 //
 //  Created by Austin Welch on 9/7/19.

@@ -14,3 +14,7 @@ protocol ImageDownloaderDelegate: class {
     func imageDownloader(_ imageDownloader: ImageDownloader, downloaded image: UIImage, at position: Int)
     func imageDownloader(_ imageDownloader: ImageDownloader, didFailWith error: Error, downloading imageURL: URL, at postion: Int)
 }
+
+extension ImageDownloaderDelegate {
+    func imageDownloader(_ imageDownloader: ImageDownloader, didFailWith error: Error, downloading imageURL: URL, at postion: Int) { }
+}

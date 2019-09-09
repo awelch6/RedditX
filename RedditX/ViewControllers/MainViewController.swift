@@ -167,7 +167,6 @@ extension MainViewController: SearchResultTableControllerDelegate {
 extension MainViewController: ContentCollectionControllerDelegate {
     
     func collectionView(_ collectionView: ContentCollectionController, didPullToRefresh: Bool) {
-        
         loadContent(subreddit: currentSubreddit) {
             collectionView.refreshControl.endRefreshing()
         }

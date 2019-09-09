@@ -68,6 +68,11 @@
 		2BB437AD2325D075007E8F82 /* SearchResultTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */; };
 		2BB437AF2325D43B007E8F82 /* PostWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */; };
 		2BB437B12325D8A0007E8F82 /* MockWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B02325D8A0007E8F82 /* MockWebView.swift */; };
+		2BB437B32325D93D007E8F82 /* SearchResultTableControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */; };
+		2BB437B52325E106007E8F82 /* MockTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B42325E106007E8F82 /* MockTableView.swift */; };
+		2BB437B72325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B62325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift */; };
+		2BB437B92325E1BC007E8F82 /* ContentCollectionControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437B82325E1BC007E8F82 /* ContentCollectionControllerTests.swift */; };
+		2BB437BB2325EBAE007E8F82 /* MockContentCollectionControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB437BA2325EBAE007E8F82 /* MockContentCollectionControllerDelegate.swift */; };
 		A3982772A961F77298CA6852 /* Pods_RedditX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE55F92B98BCA9D875FA2066 /* Pods_RedditX.framework */; };
 		E2F4319FF9035A2330D2B6A6 /* Pods_RedditXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F60F02954F6B092496BCDC /* Pods_RedditXTests.framework */; };
 /* End PBXBuildFile section */
@@ -149,6 +154,11 @@
 		2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCellTests.swift; sourceTree = "<group>"; };
 		2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebViewController.swift; sourceTree = "<group>"; };
 		2BB437B02325D8A0007E8F82 /* MockWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebView.swift; sourceTree = "<group>"; };
+		2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableControllerTests.swift; sourceTree = "<group>"; };
+		2BB437B42325E106007E8F82 /* MockTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableView.swift; sourceTree = "<group>"; };
+		2BB437B62325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchResultTableControllerDelegate.swift; sourceTree = "<group>"; };
+		2BB437B82325E1BC007E8F82 /* ContentCollectionControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionControllerTests.swift; sourceTree = "<group>"; };
+		2BB437BA2325EBAE007E8F82 /* MockContentCollectionControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContentCollectionControllerDelegate.swift; sourceTree = "<group>"; };
 		4DA93989FF87F9BD11619935 /* Pods-RedditX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditX.release.xcconfig"; path = "Target Support Files/Pods-RedditX/Pods-RedditX.release.xcconfig"; sourceTree = "<group>"; };
 		60F60F02954F6B092496BCDC /* Pods_RedditXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8F5334E272987BAA8D62051 /* Pods-RedditXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditXTests.release.xcconfig"; path = "Target Support Files/Pods-RedditXTests/Pods-RedditXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -241,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB4377B232596D2007E8F82 /* Mocks */,
+				2BB437B22325D93C007E8F82 /* SearchResultTableControllerTests.swift */,
 				2BB4377623258583007E8F82 /* ImageDownloaderTests.swift */,
 				2BB437822325A1D9007E8F82 /* UIViewControllerExtensionsTests.swift */,
 				2BB437802325975C007E8F82 /* URLEncoderTests.swift */,
@@ -260,6 +271,8 @@
 				2BB437AC2325D075007E8F82 /* SearchResultTableViewCellTests.swift */,
 				2BB437AE2325D43B007E8F82 /* PostWebViewController.swift */,
 				2BB437B02325D8A0007E8F82 /* MockWebView.swift */,
+				2BB437B62325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift */,
+				2BB437B82325E1BC007E8F82 /* ContentCollectionControllerTests.swift */,
 			);
 			path = RedditXTests;
 			sourceTree = "<group>";
@@ -365,6 +378,8 @@
 				2BB437902325B853007E8F82 /* MockNetworkable.swift */,
 				2BB437A22325C920007E8F82 /* MockListingCollectionViewDelegate.swift */,
 				2BB437A82325CF7D007E8F82 /* MockPostDetailsView.swift */,
+				2BB437B42325E106007E8F82 /* MockTableView.swift */,
+				2BB437BA2325EBAE007E8F82 /* MockContentCollectionControllerDelegate.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -639,14 +654,18 @@
 				2BB437A52325C9E2007E8F82 /* AuthorProfileViewTests.swift in Sources */,
 				2BB437912325B853007E8F82 /* MockNetworkable.swift in Sources */,
 				2BB437892325A6BB007E8F82 /* StringExtensionsTests.swift in Sources */,
+				2BB437BB2325EBAE007E8F82 /* MockContentCollectionControllerDelegate.swift in Sources */,
 				2BB4379B2325BAF0007E8F82 /* ListingViewModelTests.swift in Sources */,
 				2BB437972325B9E6007E8F82 /* ContentCollectionViewFlowLayoutTests.swift in Sources */,
 				2BB4378B2325A82C007E8F82 /* NetworkerTests.swift in Sources */,
 				2BB437A12325C4BC007E8F82 /* ListingCollectionViewTests.swift in Sources */,
 				2BB4377723258583007E8F82 /* ImageDownloaderTests.swift in Sources */,
 				2BB437AF2325D43B007E8F82 /* PostWebViewController.swift in Sources */,
+				2BB437B72325E143007E8F82 /* MockSearchResultTableControllerDelegate.swift in Sources */,
 				2BB4377F232596EF007E8F82 /* MockImageDownloaderDelegate.swift in Sources */,
+				2BB437B32325D93D007E8F82 /* SearchResultTableControllerTests.swift in Sources */,
 				2BB437832325A1D9007E8F82 /* UIViewControllerExtensionsTests.swift in Sources */,
+				2BB437B52325E106007E8F82 /* MockTableView.swift in Sources */,
 				2BB437B12325D8A0007E8F82 /* MockWebView.swift in Sources */,
 				2BB437852325A3E8007E8F82 /* MockViewController.swift in Sources */,
 				2BB437AD2325D075007E8F82 /* SearchResultTableViewCellTests.swift in Sources */,
@@ -658,6 +677,7 @@
 				2BB437A92325CF7D007E8F82 /* MockPostDetailsView.swift in Sources */,
 				2BB4379F2325C10F007E8F82 /* SearchViewModelTests.swift in Sources */,
 				2BB437A32325C920007E8F82 /* MockListingCollectionViewDelegate.swift in Sources */,
+				2BB437B92325E1BC007E8F82 /* ContentCollectionControllerTests.swift in Sources */,
 				2BB437952325B8C9007E8F82 /* ListingCollectionViewFlowLayoutTests.swift in Sources */,
 				2BB437872325A412007E8F82 /* UIViewExtenstionsTests.swift in Sources */,
 			);
